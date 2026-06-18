@@ -1,0 +1,26 @@
+{
+  "name": "riftbound-discord-bot",
+  "version": "0.1.0",
+  "description": "Discord slash-command bot for Riftbound card lookup and Singapore EloShowdown player rankings.",
+  "type": "module",
+  "packageManager": "pnpm@11.0.7",
+  "private": true,
+  "scripts": {
+    "deploy": "node src/deploy-commands.js",
+    "start": "node src/index.js",
+    "sync-emojis": "node src/sync-emojis.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "sharp": "^0.34.5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
+  }
+}
