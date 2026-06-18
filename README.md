@@ -1,5 +1,4 @@
-# Riftbound Discord Bot
-
+# Scuttle Crab Courier
 A Discord slash-command bot for Riftbound:
 
 - `/card query:<name or id>` looks up Riftbound cards using Riftbound.gg/DotGG card data.
@@ -99,6 +98,13 @@ The same `npx pnpm@11.0.7 ...` pattern works for `install`, `deploy`, `start`, a
 ```bash
 pnpm test
 ```
+
+## Deploy On Oracle Cloud
+
+For a free 24/7 host, use an Oracle Cloud Always Free Ubuntu VM and run the bot
+with Docker Compose plus systemd:
+
+[Oracle Cloud deployment guide](docs/oracle-cloud.md)
 
 ## Data Sources
 
