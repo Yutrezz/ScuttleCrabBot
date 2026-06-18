@@ -46,15 +46,21 @@ pnpm start
 
 ## Invite The Bot
 
-In the Developer Portal, generate an OAuth2 URL with:
-
-- Scopes: `bot`, `applications.commands`
-- Bot permissions: no special permissions required for basic slash-command replies
-
-Or use this URL after replacing `YOUR_CLIENT_ID`:
+Share this invite URL:
 
 ```text
-https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&scope=bot%20applications.commands&permissions=0
+https://discord.com/oauth2/authorize?client_id=1516987201836028076&scope=bot%20applications.commands&permissions=0
+```
+
+The URL uses these Discord OAuth2 settings:
+
+- Scopes: `bot`, `applications.commands`
+- Bot permissions: `0`
+
+To print the invite URL from your local `.env`:
+
+```bash
+pnpm invite
 ```
 
 ## Commands

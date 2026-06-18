@@ -7,6 +7,7 @@
   "private": true,
   "scripts": {
     "deploy": "node src/deploy-commands.js",
+    "invite": "node src/invite-url.js",
     "start": "node src/index.js",
     "sync-emojis": "node src/sync-emojis.js",
     "test": "node --test"
