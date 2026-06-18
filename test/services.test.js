@@ -265,7 +265,7 @@ test('builds top players leaderboard embed', () => {
 });
 
 test('splits large top player leaderboards across embeds', () => {
-  const players = Array.from({ length: 100 }, (_, index) => ({
+  const players = Array.from({ length: 50 }, (_, index) => ({
     rank: String(index + 1),
     name: `Player${index + 1}`,
     profileUrl: `https://www.eloshowdown.com/riftbound/player/${index + 1}/`,
@@ -275,10 +275,10 @@ test('splits large top player leaderboards across embeds', () => {
   }));
   const embeds = buildTopPlayersEmbeds(players).map((embed) => embed.toJSON());
 
-  assert.equal(embeds.length, 4);
-  assert.equal(embeds[0].title, 'Top 100 Singapore Riftbound Players (1-25)');
-  assert.equal(embeds[3].title, 'Top 100 Singapore Riftbound Players (76-100)');
-  assert.ok(embeds[3].description.includes('#100 [Player100]'));
+  assert.equal(embeds.length, 2);
+  assert.equal(embeds[0].title, 'Top 50 Singapore Riftbound Players (1-25)');
+  assert.equal(embeds[1].title, 'Top 50 Singapore Riftbound Players (26-50)');
+  assert.ok(embeds[1].description.includes('#50 [Player50]'));
 
   for (const embed of embeds) {
     assert.ok(JSON.stringify(embed).length < 6000);

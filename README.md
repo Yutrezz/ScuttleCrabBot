@@ -4,7 +4,7 @@ A Discord slash-command bot for Riftbound:
 - `/card query:<name or id>` looks up Riftbound cards using Riftbound.gg/DotGG card data.
   Searches with multiple matching variants show the best match image and list the other matches.
 - `/player name:<player>` looks up a player's Singapore Riftbound ranking from EloShowdown.
-- `/player top:<number>` shows up to 100 Singapore Riftbound leaderboard players, split across multiple messages when needed.
+- `/player top:<number>` shows up to 50 Singapore Riftbound leaderboard players, split across multiple messages when needed.
 
 ## Setup
 

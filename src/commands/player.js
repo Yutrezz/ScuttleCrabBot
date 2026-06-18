@@ -28,7 +28,7 @@ export const playerCommand = {
         .setName('top')
         .setDescription('Show the top X leaderboard players.')
         .setMinValue(1)
-        .setMaxValue(100)
+        .setMaxValue(50)
         .setRequired(false)
     ),
 
