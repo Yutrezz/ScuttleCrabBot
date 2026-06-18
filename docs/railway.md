@@ -29,10 +29,14 @@ In the Railway service, open `Variables` and add:
 ```text
 DISCORD_TOKEN=your bot token
 DISCORD_CLIENT_ID=your application/client id
+RAILPACK_NODE_VERSION=22.13.0
 LEADERBOARD_URL=https://www.eloshowdown.com/riftbound/leaderboard/singapore/
 CARD_CACHE_TTL_MINUTES=360
 LEADERBOARD_CACHE_TTL_SECONDS=300
 ```
+
+`RAILPACK_NODE_VERSION` keeps Railway on a Node release new enough for
+`pnpm@11.0.7`.
 
 Leave `DISCORD_GUILD_ID` blank for production global commands. Set it only when
 you want command registration scoped to one test server.
@@ -91,4 +95,3 @@ Logged in as YourBotName#0000.
 
 If the service crashes immediately, check that `DISCORD_TOKEN` and
 `DISCORD_CLIENT_ID` are present in Railway variables.
-
