@@ -1,7 +1,7 @@
 import { EmbedBuilder } from 'discord.js';
 import { cardPageUrl } from '../services/riftboundCards.js';
 import { renderTextSymbols } from '../services/riftboundSymbols.js';
-import { truncate } from '../utils/text.js';
+import { decodeHtmlEntities, truncate } from '../utils/text.js';
 
 const COLOR_HEX = {
   Fury: 0xe53935,
@@ -16,6 +16,7 @@ const SCUTTLE_COLOR = 0x14532d;
 const BATTLEFIELD_COLOR = 0x64748b;
 const MULTICOLOR_CARD_COLOR = 0xd4af37;
 const COLORLESS_CARD_COLOR = 0x94a3b8;
+const CARD_KEYWORD_REGEX = /\[([^\]\r\n]{1,80})\]/g;
 
 function cardColor(card) {
   const colors = card.colors ?? [];
@@ -37,6 +38,30 @@ export function renderCardSymbols(value = '', symbols = {}) {
   return renderTextSymbols(value, symbolMap);
 }
 
+function normalizeKeywordToken(value = '') {
+  return decodeHtmlEntities(value).replace(/\s+/g, ' ').trim();
+}
+
+function renderKeywordToken(value = '') {
+  const token = normalizeKeywordToken(value);
+  if (!token) return '';
+  if (/^>{1,2}$/.test(token)) return ` ${token} `;
+
+  return `\`${token.replace(/`/g, "'")}\``;
+}
+
+export function renderCardKeywords(value = '') {
+  return String(value)
+    .replace(CARD_KEYWORD_REGEX, (_, token) => renderKeywordToken(token))
+    .replace(/[ \t]{2,}/g, ' ')
+    .replace(/[ \t]+\n/g, '\n')
+    .trim();
+}
+
+export function renderCardText(value = '', symbols = {}) {
+  return renderCardKeywords(renderCardSymbols(value, symbols));
+}
+
 export function buildCardEmbed(card, otherMatches = [], options = {}) {
   const symbolMap = options.symbolMap ?? {};
   const typeLine = [card.supertype, card.type].filter(Boolean).join(' ');
@@ -52,7 +77,7 @@ export function buildCardEmbed(card, otherMatches = [], options = {}) {
   const status = [];
   if (card.banned) status.push('Banned');
   if (card.errata) {
-    status.push(`Errata: ${truncate(renderCardSymbols(card.errata, { symbolMap }), 220)}`);
+    status.push(`Errata: ${truncate(renderCardText(card.errata, { symbolMap }), 220)}`);
   }
   if (card.imageBack) status.push('Has a back side');
 
@@ -76,7 +101,7 @@ export function buildCardEmbed(card, otherMatches = [], options = {}) {
     .setURL(cardPageUrl(card))
     .setDescription(
       truncate(
-        renderCardSymbols(card.effect || card.flavor || 'No card text found.', { symbolMap }),
+        renderCardText(card.effect || card.flavor || 'No card text found.', { symbolMap }),
         3800
       )
     )

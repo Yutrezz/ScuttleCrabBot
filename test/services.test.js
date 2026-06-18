@@ -6,6 +6,8 @@ import {
   buildPlayerEmbed,
   buildTopPlayersEmbed,
   buildTopPlayersEmbeds,
+  renderCardKeywords,
+  renderCardText,
   renderCardSymbols
 } from '../src/discord/embeds.js';
 import { buildRiftboundEmojiMap } from '../src/services/discordApplicationEmojis.js';
@@ -67,6 +69,37 @@ test('renders configured Riftbound card symbols', () => {
   assert.equal(
     renderTextSymbols('Keep :rb_unknown: readable.', {}),
     'Keep :rb_unknown: readable.'
+  );
+});
+
+test('formats Riftbound keyword markup for card text', () => {
+  assert.equal(
+    renderCardKeywords('[Deathknell][>] Choose an opponent. [Predict 2].'),
+    '`Deathknell` > Choose an opponent. `Predict 2`.'
+  );
+  assert.equal(
+    renderCardKeywords(':rb_exhaust:: [Reaction] - [Add] :rb_energy_2:.'),
+    ':rb_exhaust:: `Reaction` - `Add` :rb_energy_2:.'
+  );
+  assert.equal(
+    renderCardKeywords('[Level 6][>] [>>][Reaction][>] Use this ability.'),
+    '`Level 6` > >> `Reaction` > Use this ability.'
+  );
+  assert.equal(
+    renderCardKeywords('Give a unit [Assault 4] and [Shield 2].'),
+    'Give a unit `Assault 4` and `Shield 2`.'
+  );
+});
+
+test('renders card text with symbols and keyword chips', () => {
+  assert.equal(
+    renderCardText(':rb_exhaust:: [Reaction] - [Add] :rb_energy_2:.', {
+      symbolMap: {
+        rb_exhaust: '<:rb_exhaust:111111111111111111>',
+        rb_energy_2: '<:rb_energy_2:222222222222222222>'
+      }
+    }),
+    '<:rb_exhaust:111111111111111111>: `Reaction` - `Add` <:rb_energy_2:222222222222222222>.'
   );
 });
 
