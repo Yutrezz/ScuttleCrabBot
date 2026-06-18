@@ -1,7 +1,0 @@
-.git
-.env
-node_modules
-.pnpm-store
-*.log
-coverage
-

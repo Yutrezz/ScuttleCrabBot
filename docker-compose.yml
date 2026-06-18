@@ -1,9 +1,0 @@
-services:
-  bot:
-    build:
-      context: .
-    env_file:
-      - .env
-    init: true
-    restart: unless-stopped
-

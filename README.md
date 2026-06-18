@@ -99,12 +99,11 @@ The same `npx pnpm@11.0.7 ...` pattern works for `install`, `deploy`, `start`, a
 pnpm test
 ```
 
-## Deploy On Oracle Cloud
+## Deploy On Railway
 
-For a free 24/7 host, use an Oracle Cloud Always Free Ubuntu VM and run the bot
-with Docker Compose plus systemd:
+For hosted 24/7 running, deploy the bot as a Railway service:
 
-[Oracle Cloud deployment guide](docs/oracle-cloud.md)
+[Railway deployment guide](docs/railway.md)
 
 ## Data Sources
 
