@@ -55,6 +55,21 @@ test('normalizes and searches Riftbound cards', () => {
   assert.equal(searchCardsInList(cards, 'UNL-131', 1)[0].name, 'Abandon');
 });
 
+test('normalizes Riftbound card lists into Discord bullet lines', () => {
+  const card = normalizeCard({
+    id: 'UNL-080',
+    slug: 'unl-080-hwei-brooding-painter',
+    name: 'Hwei - Brooding Painter',
+    effect:
+      'When I move, draw 1, then discard 1. Then, do the following based on the discarded card\'s type:<ul><li><strong>Spell</strong> — Draw 1.</li><li><strong>Gear</strong> — Ready up to 2 runes.</li><li><strong>Unit</strong> — Give me +3 :rb_might: this turn.</li></ul>'
+  });
+
+  assert.equal(
+    card.effect,
+    "When I move, draw 1, then discard 1. Then, do the following based on the discarded card's type:\n- Spell — Draw 1.\n- Gear — Ready up to 2 runes.\n- Unit — Give me +3 :rb_might: this turn."
+  );
+});
+
 test('renders configured Riftbound card symbols', () => {
   assert.equal(
     renderCardSymbols(':rb_exhaust:: [Add] :rb_energy_2:.', {

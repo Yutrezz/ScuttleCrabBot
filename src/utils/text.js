@@ -19,12 +19,18 @@ export function decodeHtmlEntities(value = '') {
 export function stripHtml(value = '') {
   return decodeHtmlEntities(
     String(value)
+      .replace(/\r/g, '')
       .replace(/<br\s*\/?>/gi, '\n')
       .replace(/<\/p>\s*<p>/gi, '\n\n')
+      .replace(/<li\b[^>]*>/gi, '\n- ')
+      .replace(/<\/li>/gi, '')
+      .replace(/<(ul|ol)\b[^>]*>/gi, '')
+      .replace(/<\/(ul|ol)>/gi, '\n')
+      .replace(/<\/p>/gi, '\n\n')
       .replace(/<[^>]+>/g, '')
   )
-    .replace(/\r/g, '')
     .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n[ \t]+/g, '\n')
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 }
